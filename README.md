@@ -1,48 +1,73 @@
 # CASIO fx-50FH II · Web Emulation
 
-A single-file web calculator that recreates the **CASIO fx-50FH II** — the HKEAA-approved
+A single-file web calculator that recreates the **CASIO fx-50FH II**, the HKEAA-approved
 programmable scientific calculator used by HKDSE candidates in Hong Kong.
 
 - **Live page:** <https://tyhcch1234.github.io/casio-fx-50fhii/>
 - **Source:** [`index.html`](index.html) — one file, no build step, no dependencies.
 
-![keypad](https://img.shields.io/badge/keypad-fx--50FH%20II-df7434) ![single file](https://img.shields.io/badge/single%20file-HTML%2BCSS%2BJS-2b2e34)
+## Matched to the real device
 
-## What it does
+The layout is taken from the official product page for the fx-50FHII
+(<https://www.casio.com/hk/scientific-calculators/product.FX-50FHII/>), key row by key row:
 
-The point of the project is fidelity: the case, the solar strip, the two-line
-dot-matrix LCD, the SHIFT/ALPHA silk-screen legends, and the exact key rows of the
-real device — driven by a real calculation engine rather than a scripted demo.
+- Charcoal outer shell, warm silver face plate, `CASIO` / `fx-50FH Ⅱ` wordmark.
+- Solar strip with four cells, the orange `H.K.E.A.A. APPROVED` bar and `SUPER-FX PLUS`.
+- Pale blue-grey two-line dot-matrix LCD with a recessed metal bezel.
+- Ovoid `SHIFT` / `ALPHA` / `MODE SETUP` / `ON` keys around the round `REPLAY` wheel.
+- Orange `Prog` / `FMLA`, dark-red `DEL` / `AC`, and six-column function rows above a
+  five-column numeric block — the same key order as the physical unit.
+- Every printed legend above a key is reproduced: gold for SHIFT, red for ALPHA
+  variables, teal for ALPHA functions.
 
-### Interface
+## Key operation works the same way
 
-- Silver shell with CASIO / `fx-50FH Ⅱ` branding, H.K.E.A.A. APPROVED strip, solar panel.
-- Green-grey LCD with a dot-matrix texture, a status row
-  (`SHIFT`, `ALPHA`, `M`, `hyp`, angle unit, number format), an expression line and a
-  right-aligned result line.
-- Yellow SHIFT and red ALPHA legends printed above every key; the keypad highlights the
-  keys that actually have a SHIFT / ALPHA function while the modifier is armed.
-- Six-column function block over a five-column numeric block, matching the original layout.
+| Press | What happens |
+|---|---|
+| `SHIFT` then a key | runs the gold legend above that key. A key with no gold legend does **nothing** (it does not fall through to the main function) — same as the device. |
+| `ALPHA` then a key | inserts the red variable (`A`–`F`, `X`, `Y`, `M`, `i`) or the teal function (`LOGIC`, `DEC`, `HEX`, `BIN`, `OCT`). |
+| `MODE` | opens the on-screen mode menu — `1:COMP 2:CMPLX 3:BASE 4:SD 5:REG 6:PRGM`. Choose with the number keys, arrows select, `EXE` confirms, `AC`/`DEL` cancels. |
+| `SHIFT` `MODE` | opens SETUP: angle unit → display format → digit count, one menu page at a time. |
+| `SHIFT` `1` / `SHIFT` `2` | S-SUM / S-VAR statistics menus in SD and REG modes. |
+| `RCL` + letter | recalls a variable and shows its value. `SHIFT` `RCL` (STO) + letter stores the displayed value. |
+| `M+` | adds to independent memory, or enters a data point while in SD / REG. |
+| `a b/c` / `SHIFT` `a b/c` | toggles the result between mixed fraction, improper fraction and decimal. |
+| `DEL` / `AC` / `ON` | delete character, clear everything, power on. |
+| `REPLAY` ◀ ▶ / ▲ ▼ | move the caret, or walk the calculation history. |
 
-### Calculation
+`S` and `A` appear in the status row while a modifier is armed, exactly like the device's
+own indicators.
+
+## Calculating
 
 | Area | Supported |
 |---|---|
 | Arithmetic | `+ − × ÷`, `^`, parentheses, unary minus, implicit multiplication (`2π`, `3(4+1)`) |
-| Trigonometry | `sin cos tan`, `sin⁻¹ cos⁻¹ tan⁻¹`, `sinh cosh tanh` and inverses, DEG / RAD / GRA |
-| Logs & powers | `log`, `ln`, `10ˣ`, `eˣ`, `√`, `∛`, `x²`, `x³`, `x⁻¹`, `ˣ√` |
+| Trigonometry | `sin cos tan`, inverses, hyperbolics and inverses, DEG / RAD / GRA |
+| Logs & powers | `log`, `ln`, `10ˣ`, `eˣ`, `√`, `∛`, `x²`, `x³`, `x⁻¹`, `xʸ` |
 | Combinatorics | `!`, `nPr`, `nCr` |
-| Number entry | `EXP` (`2E3`), `π`, `e`, `%`, degrees-minutes-seconds (`1°30°0`) |
-| Display formats | `Norm`, `Fix 0–9`, `Sci 0–9`, `Eng` |
-| Fractions | `a b/c` shows a mixed number, `d/c` shows an improper fraction, `S⇔D` back to decimal |
-| Memory | independent `M`, `M+`, `M−`, `STO`, `RCL`, `Ans` |
-| Extras | `Ran#`, `Rnd`, `RanInt`, `Abs`, `Pol(`, `Rec(` |
-| Editing | caret movement, `DEL`, `INS`, multi-replay history with ↑ / ↓ |
+| Entry | `EXP` (`2×10^3`), `π`, `e`, `%`, degrees-minutes-seconds (`1°30°0`), `Ran#`, `Rnd`, `Pol(`, `Rec(` |
+| Formats | `Norm`, `Fix 0–9`, `Sci 0–9`, `Eng`, `DEC / HEX / BIN / OCT` view |
+| Memory | `M`, `M+`, `M−`, `STO`, `RCL`, variables `A`–`F`, `X`, `Y`, `Ans` |
+| **COMP** | the full engine |
+| **CMPLX** | complex arithmetic — `i` on `ALPHA` `ENG`, results as `a+bi` |
+| **SD** | 1-variable statistics: `n`, `x̄`, `σn`, `σn-1`, `Σx`, `Σx²` |
+| **REG** | linear regression: `a`, `b`, `r` |
+| **BASE / PRGM** | shown in the MODE menu; choosing them reports that they are not included |
 
-### Keyboard
+## Deliberate limitations
 
-`0–9` `.` `+ - * /` `^` `( )` `,` `%` `!` `Enter`=EXE `Backspace`=DEL `Esc`=AC
-`←` `→` move the caret, `↑` `↓` replay history.
+These fx-50FH II features are **not** emulated, because they need device-level state that a
+web page cannot honestly reproduce:
+
+- **PRGM mode** (4 program areas, 680 bytes of BASIC-like programs).
+- **BASE-n mode** — only the DEC/HEX/BIN/OCT *view* of a result works, not native base
+  arithmetic.
+- **Built-in formulas** (23) and **scientific constants** (40).
+- **Σ / ∫** summation and integration, and the **SD / REG** editor's full data table.
+
+Every other key on the keypad does something real; the ones above report themselves
+instead of failing silently.
 
 ## Run it locally
 
@@ -52,26 +77,11 @@ xdg-open index.html      # Linux
 start index.html         # Windows
 ```
 
-No server, no install — the file is fully self-contained.
-
-## Deliberate limitations
-
-These fx-50FH II features are **not** emulated, because they need device-level state
-that a web page cannot honestly reproduce:
-
-- **PRGM mode** (4 program areas, 680 bytes of BASIC-like programs) — the `Prog` key
-  reports that the mode is not included.
-- **Built-in formulas** (23) and **scientific constants** (40) — the `FMLA` key reports
-  the same.
-- **Σ / ∫** summation and integration, and the **SD / REG** statistics editor.
-
-Everything else on the keypad works. If you need one of the missing modes, open an issue.
-
 ## Disclaimer
 
-This is an independent study aid. It is **not** a CASIO product, it is not affiliated
-with CASIO, and it is **not** an HKEAA-approved device — do not expect to bring a laptop
-running this page into an examination hall.
+This is an independent study aid. It is **not** a CASIO product, it is not affiliated with
+CASIO, and it is **not** an HKEAA-approved device — do not expect to bring a laptop running
+this page into an examination hall.
 
 ## License
 
