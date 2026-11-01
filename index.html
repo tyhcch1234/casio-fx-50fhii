@@ -334,7 +334,9 @@ function tokenize(src) {
       }
       let val = parseFloat(src.slice(i, j));
       i = j;
-      if (src[i] === 'E' && isDigit(src[i + 2] || '')) {
+      const expAhead = isDigit(src[i + 1] || '') ||
+        ((src[i + 1] === '+' || src[i + 1] === '-') && isDigit(src[i + 2] || ''));
+      if (src[i] === 'E' && expAhead) {
         let k = i + 1, sign = 1;
         if (src[k] === '+' ) k++;
         else if (src[k] === '-') { sign = -1; k++; }
