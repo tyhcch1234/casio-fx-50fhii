@@ -76,8 +76,8 @@ body{
   background-size:2.6px 2.6px;
 }
 .status{display:flex;gap:7px;align-items:center;height:9px;font-size:7px;font-weight:700;color:#3b4a37;letter-spacing:.04em;flex:0 0 auto;opacity:.75}
-.status .i{opacity:.12;transition:opacity .1s}
-.status .i.on{opacity:1}
+.status .i{visibility:hidden}
+.status .i.on{visibility:visible}
 .status .right{margin-left:auto;display:flex;gap:7px}
 .l1{flex:1 1 auto;display:flex;align-items:flex-end;font-size:13px;line-height:1.15;white-space:nowrap;overflow:hidden;min-height:15px}
 .l2{flex:0 0 auto;display:flex;align-items:center;justify-content:flex-end;gap:.06em;font-size:27px;font-weight:700;line-height:1.1;white-space:nowrap;overflow:hidden;min-height:34px}
@@ -196,7 +196,8 @@ body{
 </div>
 
 <p class="hint">
-  鍵盤：<b>0-9</b> <b>+ - * /</b> <b>^</b> <b>( )</b> <b>Enter</b>=EXE　<b>Backspace</b>=DEL　<b>Esc</b>=AC　<b>↑↓</b> 回放
+  鍵盤：<b>0-9</b> <b>+ - * /</b> <b>^</b> <b>( )</b> <b>Enter</b>=EXE<br>
+  <b>Backspace</b>=DEL <b>Esc</b>=AC <b>↑↓</b> 回放
 </p>
 
 <script>
